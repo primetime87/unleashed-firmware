@@ -63,3 +63,18 @@ openocd.log
 PVS-Studio.log
 
 .gdbinit
+
+# Automate files, etc
+automate.py
+deployments/
+commitnotes.md
+fbt_options.py
+
+# Asset packs
+assets/dolphin/custom/*
+!assets/dolphin/custom/NSFW/
+!assets/dolphin/custom/WatchDogs/
+!assets/dolphin/custom/ReadMe.md
+assets/resources/dolphin_custom/*
+!assets/resources/dolphin_custom/NSFW/
+!assets/resources/dolphin_custom/WatchDogs/

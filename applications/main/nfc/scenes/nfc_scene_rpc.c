@@ -1,4 +1,5 @@
 #include "../nfc_i.h"
+#include "xtreme/assets.h"
 
 void nfc_scene_rpc_on_enter(void* context) {
     Nfc* nfc = context;
@@ -7,7 +8,7 @@ void nfc_scene_rpc_on_enter(void* context) {
     popup_set_header(popup, "NFC", 89, 42, AlignCenter, AlignBottom);
     popup_set_text(popup, "RPC mode", 89, 44, AlignCenter, AlignTop);
 
-    popup_set_icon(popup, 0, 12, &I_NFC_dolphin_emulation_47x61);
+    popup_set_icon(popup, 0, 12, XTREME_ASSETS()->I_NFC_dolphin_emulation_47x61);
 
     view_dispatcher_switch_to_view(nfc->view_dispatcher, NfcViewPopup);
 
@@ -52,6 +53,13 @@ bool nfc_scene_rpc_on_event(void* context, SceneManagerEvent event) {
                         nfc_worker_start(
                             nfc->worker,
                             NfcWorkerStateMfClassicEmulate,
+                            &nfc->dev->dev_data,
+                            nfc_scene_rpc_emulate_callback,
+                            nfc);
+                    } else if(nfc->dev->format == NfcDeviceSaveFormatNfcV) {
+                        nfc_worker_start(
+                            nfc->worker,
+                            NfcWorkerStateNfcVEmulate,
                             &nfc->dev->dev_data,
                             nfc_scene_rpc_emulate_callback,
                             nfc);
